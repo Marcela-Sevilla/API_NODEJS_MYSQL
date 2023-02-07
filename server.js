@@ -1,5 +1,7 @@
 const express = require('express')
 const mysql = require('mysql')
+const routes = require('./routes')
+
 const myconn = require('express-myconnection')
 const dbOptions = {
     host: 'localhost',
@@ -19,6 +21,8 @@ app.use(myconn(mysql, dbOptions, 'single'))
 app.get('/', (req, res)=>{
     res.send('Welcome to my API')
 })
+
+app.use('/api', routes)
 
 // SERVER RUNNING---------------------------------------------------------
 app.listen(app.get('port'), () => {
