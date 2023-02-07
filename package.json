@@ -1,0 +1,26 @@
+{
+  "name": "api_nodejs_mysql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "serve.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marcela-Sevilla/API_NODEJS_MYSQL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Marcela-Sevilla/API_NODEJS_MYSQL/issues"
+  },
+  "homepage": "https://github.com/Marcela-Sevilla/API_NODEJS_MYSQL#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
