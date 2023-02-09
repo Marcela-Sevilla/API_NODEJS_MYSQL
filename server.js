@@ -24,7 +24,7 @@ app.get('/', (req, res)=>{
     console.log(dbOptions)
 })
 
-app.use('/api', routes)
+app.use('/library', routes)
 
 // SERVER RUNNING---------------------------------------------------------
 app.listen(app.get('port'), () => {
