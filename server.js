@@ -1,25 +1,27 @@
 const express = require('express')
 const mysql = require('mysql')
-const routes = require('./routes')
-
 const myconn = require('express-myconnection')
+const routes = require('./routes')
+const app = express()
+app.set('port', process.env.PORT || 9000)
+
 const dbOptions = {
     host: 'localhost',
     port: 3306,
-    use: 'root',
+    user: 'root',
     password: '',
     database: 'library'
 }
 
-const app = express()
-app.set('port', process.env.PORT || 9000)
 
 // MIDDELWARES---------------------------------------------------------
 app.use(myconn(mysql, dbOptions, 'single'))
+app.use(express.json())
 
 // ROUTES---------------------------------------------------------
 app.get('/', (req, res)=>{
     res.send('Welcome to my API')
+    console.log(dbOptions)
 })
 
 app.use('/api', routes)
