@@ -1,7 +1,10 @@
 const express = require('express')
 const routes = express.Router()
 
-routes.get('/', (req, res)=>{
+routes.get('/:id_film/:id_actor', (req, res)=>{
+    
+    let id_film = req.params.id_film;
+    let id_actor = req.params.id_actor;
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
 
@@ -17,7 +20,7 @@ routes.get('/', (req, res)=>{
         INNER JOIN inventory ON film.film_id = inventory.film_id
         INNER JOIN store ON inventory.store_id = store.store_id
         INNER JOIN address ON store.address_id = address.address_id
-        WHERE (film.film_id = 2 OR 0 = 2)`, (err, rows)=>{
+        WHERE (film.film_id = ${id_film} OR 0 = ${id_film}) AND (actor.actor_id = ${id_actor} OR 0 = ${id_actor})`,(err, rows)=>{
 
             if(err) return res.send(err)
 
