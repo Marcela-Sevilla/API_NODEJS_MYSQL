@@ -10,7 +10,7 @@ const dbOptions = {
     port: 3306,
     user: 'root',
     password: '',
-    database: 'library'
+    database: 'sakila'
 }
 
 
@@ -24,7 +24,7 @@ app.get('/', (req, res)=>{
     console.log(dbOptions)
 })
 
-app.use('/library', routes)
+app.use('/sakila', routes)
 
 // SERVER RUNNING---------------------------------------------------------
 app.listen(app.get('port'), () => {

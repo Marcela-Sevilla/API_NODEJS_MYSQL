@@ -5,7 +5,19 @@ routes.get('/', (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
 
-        conn.query('SELECT * FROM books', (err, rows)=>{
+        conn.query(`SELECT  distinct concat(actor.first_name, ' ',actor.last_name) AS 'Actor', 
+        sakila.film.title AS 'Peliculas', category.name AS 'Categoría', 
+        (SELECT avg(sakila.film.length)  FROM film) AS 'Promedio Duración',
+        address.address AS 'Dirección de Tienda'
+        FROM film 
+        INNER JOIN film_actor ON film.film_id = film_actor.film_id 
+        INNER JOIN actor ON film_actor.actor_id = actor.actor_id
+        INNER JOIN film_category ON film.film_id = film_category.film_id
+        INNER JOIN category ON film_category.category_id = category.category_id
+        INNER JOIN inventory ON film.film_id = inventory.film_id
+        INNER JOIN store ON inventory.store_id = store.store_id
+        INNER JOIN address ON store.address_id = address.address_id
+        WHERE (film.film_id = 2 OR 0 = 2)`, (err, rows)=>{
 
             if(err) return res.send(err)
 
@@ -14,43 +26,43 @@ routes.get('/', (req, res)=>{
     })
 })
 
-routes.post('/', (req, res)=>{
-    req.getConnection((err, conn)=>{
-        if(err) return res.send(err)
+// routes.post('/', (req, res)=>{
+//     req.getConnection((err, conn)=>{
+//         if(err) return res.send(err)
 
-        conn.query("INSERT INTO books set ?",[req.body], (err, rows)=>{
+//         conn.query("INSERT INTO books set ?",[req.body], (err, rows)=>{
 
-            if(err) return res.send(err)
+//             if(err) return res.send(err)
 
-            res.send('Book Insert')
-        })
-    })
-})
+//             res.send('Book Insert')
+//         })
+//     })
+// })
 
-routes.delete('/:id', (req, res)=>{
-    req.getConnection((err, conn)=>{
-        if(err) return res.send(err)
+// routes.delete('/:id', (req, res)=>{
+//     req.getConnection((err, conn)=>{
+//         if(err) return res.send(err)
 
-        conn.query("DELETE FROM books WHERE id = ?",[req.params.id], (err, rows)=>{
+//         conn.query("DELETE FROM books WHERE id = ?",[req.params.id], (err, rows)=>{
 
-            if(err) return res.send(err)
+//             if(err) return res.send(err)
 
-            res.send('Book Excluded')
-        })
-    })
-})
+//             res.send('Book Excluded')
+//         })
+//     })
+// })
 
-routes.put('/:id', (req, res)=>{
-    req.getConnection((err, conn)=>{
-        if(err) return res.send(err)
+// routes.put('/:id', (req, res)=>{
+//     req.getConnection((err, conn)=>{
+//         if(err) return res.send(err)
 
-        conn.query("UPDATE books set ? WHERE id = ?",[req.body ,req.params.id], (err, rows)=>{
+//         conn.query("UPDATE books set ? WHERE id = ?",[req.body ,req.params.id], (err, rows)=>{
 
-            if(err) return res.send(err)
+//             if(err) return res.send(err)
 
-            res.send('Book Update')
-        })
-    })
-})
+//             res.send('Book Update')
+//         })
+//     })
+// })
 
 module.exports = routes
