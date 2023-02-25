@@ -11,6 +11,15 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:9000/sakila/film_actor HTTP/1.1
+Content-Type: application/json
+
+{
+    "actor_id" : 202,
+    "film_id" : 2
+}
+
+###
 DELETE http://localhost:9000/library/3 HTTP/1.1
 
 ###

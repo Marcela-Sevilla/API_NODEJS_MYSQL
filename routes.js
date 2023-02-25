@@ -42,6 +42,18 @@ routes.post('/', (req, res)=>{
     })
 })
 
+routes.post('/film_actor', (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
+
+        conn.query("INSERT INTO film_actor set ?", [req.body], (err, rows)=>{
+            if(err) return res.send(err)
+            
+            res.send('Actor related a film')
+        })
+    })
+})
+
 // routes.delete('/:id', (req, res)=>{
 //     req.getConnection((err, conn)=>{
 //         if(err) return res.send(err)
