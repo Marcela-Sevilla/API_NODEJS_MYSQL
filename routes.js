@@ -29,18 +29,18 @@ routes.get('/:id_film/:id_actor', (req, res)=>{
     })
 })
 
-// routes.post('/', (req, res)=>{
-//     req.getConnection((err, conn)=>{
-//         if(err) return res.send(err)
+routes.post('/', (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
 
-//         conn.query("INSERT INTO books set ?",[req.body], (err, rows)=>{
+        conn.query("INSERT INTO actor set ?",[req.body], (err, rows)=>{
 
-//             if(err) return res.send(err)
+            if(err) return res.send(err)
 
-//             res.send('Book Insert')
-//         })
-//     })
-// })
+            res.send('Actor Insert')
+        })
+    })
+})
 
 // routes.delete('/:id', (req, res)=>{
 //     req.getConnection((err, conn)=>{
