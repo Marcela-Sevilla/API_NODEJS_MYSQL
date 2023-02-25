@@ -1,6 +1,7 @@
 const express = require('express')
 const routes = express.Router()
 
+// REQUEST TYPE GET
 routes.get('/', (req, res)=>{
     req.getConnection((err,conn)=>{
         if(err) return res.send(err)
@@ -79,30 +80,32 @@ routes.post('/film_actor', (req, res)=>{
     })
 })
 
-// routes.delete('/:id', (req, res)=>{
-//     req.getConnection((err, conn)=>{
-//         if(err) return res.send(err)
+// REQUEST TYPE DELETE
+routes.delete('/:id', (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
 
-//         conn.query("DELETE FROM books WHERE id = ?",[req.params.id], (err, rows)=>{
+        conn.query("DELETE FROM film WHERE film_id = ?",[req.params.id], (err, rows)=>{
 
-//             if(err) return res.send(err)
+            if(err) return res.send(err)
 
-//             res.send('Book Excluded')
-//         })
-//     })
-// })
+            res.send('Film Excluded')
+        })
+    })
+})
 
-// routes.put('/:id', (req, res)=>{
-//     req.getConnection((err, conn)=>{
-//         if(err) return res.send(err)
+// REQUEST TYPE PUT(UPDATE)
+routes.put('/:id', (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
 
-//         conn.query("UPDATE books set ? WHERE id = ?",[req.body ,req.params.id], (err, rows)=>{
+        conn.query("UPDATE actor set ? WHERE actor_id = ?",[req.body ,req.params.id], (err, rows)=>{
 
-//             if(err) return res.send(err)
+            if(err) return res.send(err)
 
-//             res.send('Book Update')
-//         })
-//     })
-// })
+            res.send('actor Update')
+        })
+    })
+})
 
 module.exports = routes
